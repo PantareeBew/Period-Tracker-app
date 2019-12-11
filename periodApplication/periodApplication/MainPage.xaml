@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:periodApplication"
+             x:Class="periodApplication.MainPage">
+
+    <!-- For ios-->
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <StackLayout>
+        <!-- Background setting-->
+        <StackLayout x:Name="SLmain" BackgroundColor="FloralWhite"
+                     HorizontalOptions="Center" HeightRequest="1000" WidthRequest="1000">
+            <!-- Header color attribute-->
+            <StackLayout Margin="10">
+                <Label Text="Period time" 
+                      TextColor="#DE3163"
+                FontAttributes="Bold"
+               Style="{DynamicResource TitleStyle}"
+               Margin="0, 0"
+               HorizontalTextAlignment="Center" />
+                <!-- start date-->
+                <Label Text="Start Date:" FontSize="20" TextColor="#EC5578" FontAttributes="Bold"/>
+                
+                <!-- satrt date picker -->
+                <DatePicker x:Name="startDatePicker"
+                    Format="D"
+                    Margin="30, 0, 0, 30"
+                    DateSelected="OnDateSelected" />
+                 
+                <!--End date-->
+                <Label Text="End Date:" FontSize="20" TextColor="#EC5578" FontAttributes="Bold"/>
+                
+                <!-- End date picker-->
+                <DatePicker x:Name="endDatePicker"
+                    MinimumDate="{Binding Source={x:Reference startDatePicker},
+                                          Path=Date}"
+                    Format="D"
+                    Margin="30, 0, 0, 30"
+                    DateSelected="OnDateSelected" />
+                
+                <!-- Button-->
+                <Button x:Name="btnCalculate" Text="Calculate" Clicked="btnCalculate_Clicked" 
+                        VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"/>
+
+                <!--Result properties-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100"  />
+                    <Label x:Name="resultLabel" BackgroundColor="#DE3163" TextColor="white" FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" FontSize="20"/>
+                </Grid>
+                
+                <!-- image -->
+                <Image Source="periodBackground.JPG"/>
+
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
+
